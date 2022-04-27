@@ -13,15 +13,18 @@ struct ContentView: View {
     
     @State var xOffset = -100.0
     
-    
+    // MARK: control the rotation of the star
+    @State var starRotation = 0.0
     
     // MARK: Computed Properties
     var body: some View {
-        Image(systemName: "star")
+        Image(systemName: "circle.fill")
             .resizable()
             .frame(width: 40, height: 40)
             .foregroundColor(.yellow)
+            .rotation3DEffect(Angle.degrees(starRotation), axis: (x: 1, y: 1, z: 1))
             .offset(x: xOffset, y: 0)
+            
             .animation(Animation
                         .easeInOut(duration: 1.5)
                         .repeatForever(autoreverses: true))
@@ -29,7 +32,8 @@ struct ContentView: View {
             .onTapGesture{
                 // 2. logic that changes the state
                 xOffset = 100.0
-                
+                // Spin the star twice
+                starRotation = 720
                 
             }
         
